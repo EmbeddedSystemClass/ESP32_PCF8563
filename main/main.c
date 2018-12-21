@@ -3,9 +3,8 @@
 #include "freertos/task.h"
 #include "driver/uart.h"
 #include "driver/gpio.h"
+#include "esp_log.h"
 
-#include "Led.h"
-#include "E2prom.h"
 #include "PCF8563.h"
 #include "iic.h"
 
@@ -42,11 +41,15 @@ static void Time_Read_Task(void* arg)
 {
     while(1)
     {
-        printf("read timestamp\n");   
+        printf("read timestamp\n");  
+        ESP_LOGW("gjh:", "版本控制！！！不听话就挨揍！！！"); 
         timestamp=Read_UnixTime();
 
         printf("timestamp=%lld\n",timestamp);
         Read_UTCtime();
+        
+        ESP_LOGE("gjh:", "版本控制！！！不听话就挨揍！！！");
+
         vTaskDelay(1000 / portTICK_RATE_MS);
     }  
 }
